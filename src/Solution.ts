@@ -43,24 +43,28 @@ export const fillTheRoom = (room: IRoom) => {
     room.color(row, col, fillColor);
 
     const doExplore = () => {
-      const curRow = rowQueue.shift() as number;
-      const curCol = colQueue.shift() as number;
-      for (let k = 0; k < 4; k++) {
-        const nextRow = curRow + deltaRow[k];
-        const nextCol = curCol + deltaCol[k];
-        if (nextRow < 0 || nextRow >= room.rowCount || nextCol < 0 || nextCol >= room.colCount) {
-          continue;
-        }
+      let toExplore = rowQueue.length;
+      while (toExplore > 0) {
+        const curRow = rowQueue.shift() as number;
+        const curCol = colQueue.shift() as number;
+        for (let k = 0; k < 4; k++) {
+          const nextRow = curRow + deltaRow[k];
+          const nextCol = curCol + deltaCol[k];
+          if (nextRow < 0 || nextRow >= room.rowCount || nextCol < 0 || nextCol >= room.colCount) {
+            continue;
+          }
 
-        if (!visited[nextRow][nextCol] && room.color(nextRow, nextCol, fillColor)) {
-          visited[nextRow][nextCol] = true;
-          rowQueue.push(nextRow);
-          colQueue.push(nextCol);
+          if (!visited[nextRow][nextCol] && room.color(nextRow, nextCol, fillColor)) {
+            visited[nextRow][nextCol] = true;
+            rowQueue.push(nextRow);
+            colQueue.push(nextCol);
+          }
         }
+        toExplore--;
       }
 
-      if (colQueue.length > 0) {
-        setTimeout(doExplore, 0);
+      if (rowQueue.length > 0) {
+        setTimeout(doExplore, 100);
       } else {
         //console.log('done!!');
         callBack(row, col);
