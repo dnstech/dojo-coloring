@@ -24,11 +24,11 @@ interface IRoom {
 }
 ```
 
-You will need to implement the `Solution.ts` methods for the following challenges, using the `color()` function. This function accept a `row` and a `col`, which denotes a cell on the board, and an optional `fillColor`. It will color a cell using a predefined list of colors.
+You will need to implement the `Solution.ts` methods for the following challenges, using the `color()` function. This function accept a `row` and a `col`, which denotes a cell on the board, and an optional `fillColor`. If you don't pass any `fillColor` it will use a random one, if you pass a number it will make sure that same number will be matched to same color. As the name says, the function will color a cell.
 
 It will return `true` if the coloring was successful and `false` otherwise.
 
-It runs synchronously in the current event loop. So, give it a bit of time to draw the cell if tou want to see the action.
+It runs synchronously in the current event loop. So, give it a bit of time to draw the cell if you want to see the action.
 
 ## Itermediate challenge
 For anyone who has got the project up an running. Here's a challenge for you: Can you color a cell on the board by mouse? I.e. click on a cell will color it

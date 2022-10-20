@@ -1,6 +1,6 @@
 # Coding dojo
 
-Second challenge: Color the board! **You'll need to implement the `Solution.ts`**
+Second challenge: Color the board! Please read [CHALLENGES.md](CHALLENGES.md)
 
 If you're already familiar with `npm` and stuffs, happy coding!
 
