@@ -14,21 +14,15 @@ export const fillTheRoom = (room: IRoom) => {
   const deltaCol = [1, 0, -1,  0];
   const deltaRow = [0, 1,  0, -1];
 
-  const createUnvisitedArray = (rowCount: number, colCount: number): boolean[][] => {
-    const array = [];
-    for (let i = 0; i < rowCount; i++) {
-      const row = [];
-      for (let j = 0; j < colCount; j++) {
-        row.push(false);
-      }
-
-      array.push(row);
+  const visited: boolean[][] =  [];
+  for (let i = 0; i < room.rowCount; i++) {
+    const row = [];
+    for (let j = 0; j < room.colCount; j++) {
+      row.push(false);
     }
 
-    return array;
-  };
-
-  const visited = createUnvisitedArray(room.rowCount, room.colCount);
+    visited.push(row);
+  }
 
   const bfs = (row: number, col: number, callBack: (lastRow: number, lastCol: number) => void) => {
     const rowQueue: number[] = [];
@@ -40,7 +34,10 @@ export const fillTheRoom = (room: IRoom) => {
     rowQueue.push(row);
     colQueue.push(col);
     visited[row][col] = true;
-    room.color(row, col, fillColor);
+    if (!room.color(row, col, fillColor)) {
+      callBack(row, col);
+      return;
+    }
 
     const doExplore = () => {
       let toExplore = rowQueue.length;
@@ -66,7 +63,7 @@ export const fillTheRoom = (room: IRoom) => {
       if (rowQueue.length > 0) {
         setTimeout(doExplore, 10);
       } else {
-        //console.log('done!!');
+        console.log(`Finished exploring area containing cell (${row}, ${col})!!`);
         callBack(row, col);
       }
     };
@@ -82,6 +79,7 @@ export const fillTheRoom = (room: IRoom) => {
       col = 0;
     }
     if (row === room.rowCount) {
+      console.log('done! done!!!');
       return;
     }
 
