@@ -9,11 +9,23 @@ export const mouseClickHandler = (room: IRoom, e: MouseEvent) => {
 
 export const fillTheRoom = (room: IRoom) => {
   let color = Math.random() * 10000;
+  let cell_delay = 1.00; // Increase to slow the fill, or decrease to speed it up.
+
+  let start_time = new Date().getTime();
   for (let y = 0; y < room.rowCount; ++y) {
     for (let x = 0; x < room.colCount; ++x) {
-        setTimeout(() => {
-            room.color(y, x, color);
-        }, y*room.colCount + x);
+      let cb = function() {
+        let current_time = new Date().getTime(),
+        delta = current_time - start_time;
+
+        let delay = y*room.colCount*cell_delay + x*cell_delay;
+        if (delta >= delay) {
+          room.color(y, x, color);
+        } else {
+          requestAnimationFrame(cb);
+        }
+      }
+      requestAnimationFrame(cb);
     }
   }
 };
