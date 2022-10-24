@@ -11,6 +11,7 @@ export const mouseClickHandler = (room: IRoom, e: MouseEvent) => {
 
 export const fillTheRoom = (room: IRoom) => {
   // your code here for challenge 2
+  const fillDelay = 10; // delay in milliseconds
   const deltaCol = [1, 0, -1,  0];
   const deltaRow = [0, 1,  0, -1];
 
@@ -61,7 +62,7 @@ export const fillTheRoom = (room: IRoom) => {
       }
 
       if (rowQueue.length > 0) {
-        setTimeout(doExplore, 10);
+        setTimeout(doExplore, fillDelay);
       } else {
         console.log(`Finished exploring area containing cell (${row}, ${col})!!`);
         callBack(row, col);
