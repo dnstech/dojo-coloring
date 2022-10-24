@@ -8,5 +8,12 @@ export const mouseClickHandler = (room: IRoom, e: MouseEvent) => {
 };
 
 export const fillTheRoom = (room: IRoom) => {
-  // your code here for challenge 2
+  let color = Math.random() * 10000;
+  for (let y = 0; y < room.rowCount; ++y) {
+    for (let x = 0; x < room.colCount; ++x) {
+        setTimeout(() => {
+            room.color(y, x, color);
+        }, y*room.colCount + x);
+    }
+  }
 };
