@@ -64,7 +64,7 @@ export const fillTheRoom = (room: IRoom) => {
       }
 
       if (rowQueue.length > 0) {
-        setTimeout(doExplore, 100);
+        setTimeout(doExplore, 10);
       } else {
         //console.log('done!!');
         callBack(row, col);
